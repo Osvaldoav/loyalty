@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Keyboard } from 'react-native';
 import firebase from 'firebase';
+import 'firebase/firestore';
 import { Header , Button, Container, Text} from 'native-base';
 import Input from './Input';  
 import Spinner from './Spinner';
@@ -53,11 +54,17 @@ export default class Login extends React.Component {
             if (type == 'success') {
                 const credential = firebase.auth.FacebookAuthProvider.credential(token)
 
-                firebase.auth().signInWithCredential(credential).catch((error) => {
-                    console.log(error)
-                })
+                firebase.auth().signInWithCredential(credential)
+                    //.then(console.log(firebase.auth().currentUser.uid))
                 Actions.Logout();
             }
+    }
+
+    registerFb(){
+        console.log("dd")
+        var db = firebase.firestore();
+        db.doc('Users/' + firebase.auth().currentUser.uid).set(
+        {  Points: 0 , Products: []}).catch((error) =>console.log("dddddddd"));
     }
 
     renderButton(){

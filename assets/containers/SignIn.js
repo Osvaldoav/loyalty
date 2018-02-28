@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Keyboard } from 'react-native';
 import firebase from 'firebase';
+import 'firebase/firestore';
 import { Actions } from 'react-native-router-flux';
 import Input from './Input';  
 import { Header , Button, Container, Text} from 'native-base';
@@ -20,7 +21,6 @@ export default class SignIn extends React.Component {
         else{
             firebase.auth().createUserWithEmailAndPassword(email , password)
                 .then(this.onLoginSucces.bind(this))
-                .catch(this.onLoginFail.bind(this));
         }
     }
 
@@ -46,6 +46,9 @@ export default class SignIn extends React.Component {
 
     onLoginSucces() {
         this.setState({email: '', password: '', password2: '', loading: false, error: ''});
+        var db = firebase.firestore();
+        db.doc('Users/' + firebase.auth().currentUser.uid).set(
+            {  Points: 0 , Products: []})
         Keyboard.dismiss()
         Actions.pop()
     }
