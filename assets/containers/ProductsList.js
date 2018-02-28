@@ -3,9 +3,9 @@ import {Text, ScrollView, View} from 'react-native';
 import firebase from 'firebase';
 import 'firebase/firestore';
 import Header from './Header';
-import PriceDetail from './PriceDetail';
+import ProductDetail from './ProductDetail';
 
-class PriceList extends Component{
+class ProductsList extends Component{
     state = {products: [], productsLoaded: false};
     
     componentWillMount(){
@@ -28,7 +28,7 @@ class PriceList extends Component{
 
     renderPrices(){
         return this.state.products.map(product => 
-            <PriceDetail key={product.Id} product={product}></PriceDetail>
+            <ProductDetail key={product.Id} product={product}></ProductDetail>
         );
     }
 
@@ -51,4 +51,4 @@ const styles = {
     }
   }
 
-export default PriceList;
+export default ProductsList;

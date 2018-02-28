@@ -11,7 +11,7 @@ class QRScreen extends Component {
     render(){
         const {Id, Points} = this.props.product;
         const str = Id + '|' + Points;
-        // const str = this.props.selectedProduct + '|' + this.props.price.Id + '|' + this.props.price.Points;
+
         return (
             <View style={styles.ContainerStyle}>
                 <QRCode

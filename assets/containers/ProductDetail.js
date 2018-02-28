@@ -7,7 +7,7 @@ import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
-class PriceDetail extends Component {
+class ProductDetail extends Component {
 
     constructor(props){
         super(props);
@@ -77,4 +77,4 @@ const styles = {
     }
 };
 
-export default connect(null, actions)(PriceDetail);
+export default connect(null, actions)(ProductDetail);

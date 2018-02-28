@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 import firebase from 'firebase';
 
-import PriceList from './assets/containers/PriceList';
+import ProductsList from './assets/containers/ProductsList';
 import QRScreen from './assets/containers/QRScreen';
 import reducers from './assets/reducers';
 
@@ -26,7 +26,7 @@ export default class App extends Component {
       <Provider store={createStore(reducers)}>
         <Router>
           <Scene key='root'>
-            <Scene key='Products' component={PriceList} title='Price List' initial/>
+            <Scene key='Products' component={ProductsList} title='Products List' initial/>
             <Scene key='QRCode' component={QRScreen} title='Codigo QR'/>
           </Scene>
         </Router>
