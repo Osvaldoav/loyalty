@@ -4,6 +4,7 @@ import firebase from 'firebase';
 import 'firebase/firestore';
 import Header from './Header';
 import ProductDetail from './ProductDetail';
+import FooterBar from './FooterBar';
 
 class ProductsList extends Component{
     state = {products: [], productsLoaded: false};
@@ -38,6 +39,7 @@ class ProductsList extends Component{
                 <ScrollView>
                     {this.state.productsLoaded ? this.renderPrices() : null}
                 </ScrollView>
+                <FooterBar/>
             </View>
 
         );
