@@ -9,7 +9,6 @@ class QRScreen extends Component {
     }
 
     render(){
-        console.log(this.props);
         const {Id, Points} = this.props.product;
         const str = Id + '|' + Points;
         // const str = this.props.selectedProduct + '|' + this.props.price.Id + '|' + this.props.price.Points;
