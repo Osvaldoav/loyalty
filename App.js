@@ -8,6 +8,9 @@ import firebase from 'firebase';
 import ProductsList from './assets/containers/ProductsList';
 import QRScreen from './assets/containers/QRScreen';
 import reducers from './assets/reducers';
+import Login from './assets/containers/Login';
+import SignIn from './assets/containers/SignIn';
+import Logout from './assets/containers/Logout';
 
 export default class App extends Component {
   componentWillMount(){
@@ -25,10 +28,26 @@ export default class App extends Component {
     return (
       <Provider store={createStore(reducers)}>
         <Router>
-          <Scene key='root'>
-            <Scene key='Products' component={ProductsList} title='Products List' initial/>
-            <Scene key='QRCode' component={QRScreen} title='Codigo QR'/>
+          <Scene hideNavBar>
+            <Scene
+              key='Login'
+              component={Login}
+              initial
+            />
+            <Scene 
+              key='Logout'
+              component={Logout}
+            />
+            <Scene
+              key='SignIn'
+              component={SignIn}
+            />
+            <Scene key='Main'>
+              <Scene key='Products' component={ProductsList} title='Products List' initial/>
+              <Scene key='QRCode' component={QRScreen} title='Codigo QR'/>
+            </Scene>
           </Scene>
+            
         </Router>
       </Provider>
 
