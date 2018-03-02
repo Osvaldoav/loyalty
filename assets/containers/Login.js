@@ -17,6 +17,7 @@ export default class Login extends React.Component {
             this.setState({ loggedIn: false });
         }
     });
+    console.log (firebase.auth().currentUser);
    }
     
     state = { email: '', password: '', error: '', loading: false}
@@ -28,12 +29,6 @@ export default class Login extends React.Component {
 
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(this.onLoginSucces.bind(this), this.onLoginFail.bind(this))
-            /* 
-            .catch(() => {
-                firebase.auth().createUserWithEmailAndPassword(email , password)
-                    .then(this.onLoginSucces.bind(this))
-                    .catch(this.onLoginFail.bind(this));
-            }); */
     }
 
     onLoginSucces() {
@@ -55,16 +50,8 @@ export default class Login extends React.Component {
                 const credential = firebase.auth.FacebookAuthProvider.credential(token)
 
                 firebase.auth().signInWithCredential(credential)
-                    //.then(console.log(firebase.auth().currentUser.uid))
                 Actions.Logout();
             }
-    }
-
-    registerFb(){
-        console.log("dd")
-        var db = firebase.firestore();
-        db.doc('Users/' + firebase.auth().currentUser.uid).set(
-        {  Points: 0 , Products: []}).catch((error) =>console.log("dddddddd"));
     }
 
     renderButton(){
@@ -83,7 +70,7 @@ export default class Login extends React.Component {
             </Button>
 
             <Button bordered style={styles.botonFb} onPress={() => this.loginWithFacebook()}>
-                <Text style={{ fontSize: 20, color: 'white' }}> Iniciar Sesion con Facebook </Text>
+                <Text style={{ fontSize: 20, color: 'white' }}> Continuar con Facebook </Text>
             </Button>
 
             </View>

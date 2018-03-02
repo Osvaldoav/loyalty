@@ -9,6 +9,16 @@ import Spinner from './Spinner';
 
 export default class SignIn extends React.Component {
 
+    componentWillMount(){
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                var db = firebase.firestore();
+                db.doc('Users/' + firebase.auth().currentUser.uid).set(
+                {  Points: 0 , Products: []})
+            }
+        });
+    }
+
     state = { email: '', password: '', password2: '', error: '', loading: false}
 
     onButtonPress(){
@@ -21,6 +31,28 @@ export default class SignIn extends React.Component {
         else{
             firebase.auth().createUserWithEmailAndPassword(email , password)
                 .then(this.onLoginSucces.bind(this))
+        }
+    }
+
+    async loginWithFacebook(){
+        const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync
+            ('210427583036372', { permissions: ['public_profile'] })
+
+            if (type == 'success') {
+                const credential = firebase.auth.FacebookAuthProvider.credential(token)
+
+                await firebase.auth().signInWithCredential(credential);
+                Actions.Logout();
+            }
+    }
+
+    registerFb(){
+        while (firebase.auth().currentUser == null){}
+        if (firebase.auth().currentUser !== null){
+            var db = firebase.firestore();
+            db.doc('Users/' + firebase.auth().currentUser.uid).set(
+            {  Points: 0 , Products: []})
+            console.log (firebase.auth().currentUser.uid);
         }
     }
 
@@ -38,6 +70,10 @@ export default class SignIn extends React.Component {
 
             <Button bordered style={styles.boton} onPress={() => Actions.pop()}>
                 <Text style={{ fontSize: 20, color: 'black' }}> Volver </Text>
+            </Button>
+
+            <Button bordered style={styles.botonFb} onPress={() => this.loginWithFacebook()}>
+                <Text style={{ fontSize: 20, color: 'white' }}> Registrarse con Facebook </Text>
             </Button>
 
             </View>
@@ -119,7 +155,7 @@ const styles = {
         marginTop: '6%',
         alignSelf: 'center',
         backgroundColor: '#CEF6F5',
-        height: '40%',
+        height: '33%',
         width: '65%',
         borderRadius: 10,
         borderColor: '#04B4AE',
@@ -130,4 +166,14 @@ const styles = {
         alignSelf: 'center',
         color: 'red'
     },
-}
+    botonFb: {
+        marginTop: '6%',
+        alignSelf: 'center',
+        backgroundColor: '#4267B2',
+        height: '33%',
+        width: '65%',
+        justifyContent: 'center',
+        borderRadius: 10,
+        borderColor: '#4267B2',
+    }
+};

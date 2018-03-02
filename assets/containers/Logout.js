@@ -6,14 +6,22 @@ import { Actions } from 'react-native-router-flux';
 
 export default class Login extends React.Component {
     render(){
-        console.log(firebase.auth().currentUser.uid);
+        if (firebase.auth().currentUser !== null){
+            console.log(firebase.auth().currentUser.uid); }
         return (
             <Container style={styles.fondo}>
             <Button bordered 
              style={styles.boton}
-             onPress={() => {firebase.auth().signOut(); Actions.Main() }} >
-            <Text> hola </Text> 
+             onPress={() => { Actions.Main() }} >
+            <Text> Menu </Text> 
             </Button>
+
+            <Button bordered 
+             style={styles.boton}
+             onPress={() => { firebase.auth().signOut(); Actions.pop() }} >
+            <Text> Salir </Text> 
+            </Button>
+
             </Container>
         );
     }

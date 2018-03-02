@@ -1,8 +1,8 @@
 {
   "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://3c-92y.salexisvf.loyalty.exp.direct",
-  "packagerNgrokUrl": "https://packager.3c-92y.salexisvf.loyalty.exp.direct",
-  "ngrokPid": 12553,
+  "expoServerNgrokUrl": "https://yx-err.salexisvf.loyalty.exp.direct",
+  "packagerNgrokUrl": "https://packager.yx-err.salexisvf.loyalty.exp.direct",
+  "ngrokPid": 17169,
   "packagerPort": 19003,
-  "packagerPid": 12538
+  "packagerPid": 17155
 }
