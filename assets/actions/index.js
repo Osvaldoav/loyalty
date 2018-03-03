@@ -4,3 +4,10 @@ export const selectProduct = (product) => {
         payload: product
     };
 };
+
+export const selectFooter = (name) => {
+    return {
+        type: 'select_footer',
+        payload: name
+    }
+}
